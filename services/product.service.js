@@ -1,3 +1,5 @@
+/* ayuda */
+
 const faker = require("faker");
 
 class ProductsService {

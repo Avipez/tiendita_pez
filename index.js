@@ -1,6 +1,9 @@
 const express = require("express");
-const app = express();
 const routerApi = require("./routes")
+
+const { logErrors, errorHandler, boomErrorHandler } = require ("./middleware/error.handler")
+
+const app = express();
 const port = 8080;
 
 app.use(express.json());
@@ -14,6 +17,11 @@ app.get("/", (req, resp) => {
 app.get("/nueva_ruta", (req, resp) => {
   resp.send("hola soy una nueva ruta");
 });
+
+app.use(logErrors);
+app.use(boomErrorHandler);
+app.use(errorHandler);
+
 
 app.listen(port, () => {
   console.log("Mi port" + port);

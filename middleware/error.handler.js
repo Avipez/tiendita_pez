@@ -6,6 +6,7 @@ function logErrors(error, req, resp, next) {
 
 function errorHandler(error, req, resp, next) {
   console.log("error handler");
+  return
   resp.status(500).json({
     message: error.message,
     stack: error.stack,
@@ -15,6 +16,7 @@ function errorHandler(error, req, resp, next) {
 function boomErrorHandler(error, req, resp, next) {
   if (error.isBoom) {
     const { output } = error;
+    return
     resp.status( output.statusCode).json(output.payload);
   }
   next(error);

@@ -9,13 +9,13 @@ const {
 } = require('./middleware/error.handler');
 
 const app = express();
-const port = 8080;
+const port = process.env.PORT || 8080;
 
 app.use(express.json());
 const whitelist = ['http://127.0.0.1:5500/'];
 const options = {
   origin: (origin, callback) => {
-    if (whitelist.includes(origin) !== 1) {
+    if (whitelist.includes(origin) || !origin) {
       callback(null, true);
     } else {
       callback(new Error('no permitido'));

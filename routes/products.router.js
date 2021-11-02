@@ -42,7 +42,6 @@ productsRouter.patch('/:id', validatorHandler(getProductSchema, "params"), valid
     const { id } = req.params;
     const body = req.body;
     const product = await service.update(id, body);
-    return
     resp.json(product);
   } catch (error) {
     next(error);
